@@ -56,8 +56,8 @@ public class ProvidersTest extends AbstractAuthenticationTest {
         List<Map<String, Object>> result = authMgmtResource.getFormActionProviders();
 
         List<Map<String, Object>> expected = new LinkedList<>();
-        addProviderInfo(expected, "registration-profile-action", "Profile Validation",
-                "Validates email, first name, and last name attributes and stores them in user data.");
+        addProviderInfo(expected, "registration-name-action", "Name Validation",
+                "Validates first name and last name attributes and stores them in user data.");
         addProviderInfo(expected, "registration-recaptcha-action", "Recaptcha",
                 "Adds Google Recaptcha button.  Recaptchas verify that the entity that is registering is a human.  " +
                         "This can only be used on the internet and must be configured after you add it.");
@@ -66,6 +66,8 @@ public class ProvidersTest extends AbstractAuthenticationTest {
         addProviderInfo(expected, "registration-user-creation", "Registration User Creation",
                 "This action must always be first! Validates the username of the user in validation phase.  " +
                         "In success phase, this will create the user in the database.");
+        addProviderInfo(expected, "registration-email-action", "Email Validation",
+                "Validates email attributes and stores them in user data.");
 
         compareProviders(expected, result);
     }
