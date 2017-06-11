@@ -50,13 +50,13 @@ public class RegistrationFlowTest extends AbstractAuthenticationTest {
 
         // Should fail to add execution under top level flow
         Map<String, String> data2 = new HashMap<>();
-        data2.put("provider", "registration-profile-action");
+        data2.put("provider", "registration-email-action");
         try {
             authMgmtResource.addExecution("registration2", data2);
-            Assert.fail("Not expected to add execution of type 'registration-profile-action' under top flow");
+            Assert.fail("Not expected to add execution of type 'registration-email-action' under top flow");
         } catch (BadRequestException bre) {
             String errorMessage = bre.getResponse().readEntity(String.class);
-            Assert.assertEquals("No authentication provider found for id: registration-profile-action", errorMessage);
+            Assert.assertEquals("No authentication provider found for id: registration-email-action", errorMessage);
         }
 
         // Should success to add execution under form flow

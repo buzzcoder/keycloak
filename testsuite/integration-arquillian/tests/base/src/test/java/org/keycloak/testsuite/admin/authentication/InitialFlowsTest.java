@@ -178,7 +178,8 @@ public class InitialFlowsTest extends AbstractAuthenticationTest {
         execs = new LinkedList<>();
         addExecInfo(execs, "registration form", "registration-page-form", false, 0, 0, REQUIRED, true, new String[]{REQUIRED, DISABLED});
         addExecInfo(execs, "Registration User Creation", "registration-user-creation", false, 1, 0, REQUIRED, null, new String[]{REQUIRED, DISABLED});
-        addExecInfo(execs, "Profile Validation", "registration-profile-action", false, 1, 1, REQUIRED, null, new String[]{REQUIRED, DISABLED});
+        addExecInfo(execs, "Name Validation", "registration-name-action", false, 1, 1, REQUIRED, null, new String[]{REQUIRED, DISABLED});
+        addExecInfo(execs, "Email Validation", "registration-email-action", false, 1, 1, REQUIRED, null, new String[]{REQUIRED, DISABLED});
         addExecInfo(execs, "Password Validation", "registration-password-action", false, 1, 2, REQUIRED, null, new String[]{REQUIRED, DISABLED});
         addExecInfo(execs, "Recaptcha", "registration-recaptcha-action", true, 1, 3, DISABLED, null, new String[]{REQUIRED, DISABLED});
         expected.add(new FlowExecutions(flow, execs));

@@ -43,12 +43,12 @@ import java.util.List;
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
  * @version $Revision: 1 $
  */
-public class RegistrationProfile implements FormAction, FormActionFactory {
-    public static final String PROVIDER_ID = "registration-profile-action";
+public class RegistrationEmail implements FormAction, FormActionFactory {
+    public static final String PROVIDER_ID = "registration-email-action";
 
     @Override
     public String getHelpText() {
-        return "Validates email, first name, and last name attributes and stores them in user data.";
+        return "Validates email attributes and stores them in user data.";
     }
 
     @Override
@@ -63,14 +63,6 @@ public class RegistrationProfile implements FormAction, FormActionFactory {
 
         context.getEvent().detail(Details.REGISTER_METHOD, "form");
         String eventError = Errors.INVALID_REGISTRATION;
-
-        if (Validation.isBlank(formData.getFirst((RegistrationPage.FIELD_FIRST_NAME)))) {
-            errors.add(new FormMessage(RegistrationPage.FIELD_FIRST_NAME, Messages.MISSING_FIRST_NAME));
-        }
-
-        if (Validation.isBlank(formData.getFirst((RegistrationPage.FIELD_LAST_NAME)))) {
-            errors.add(new FormMessage(RegistrationPage.FIELD_LAST_NAME, Messages.MISSING_LAST_NAME));
-        }
 
         String email = formData.getFirst(Validation.FIELD_EMAIL);
         boolean emailValid = true;
@@ -93,8 +85,6 @@ public class RegistrationProfile implements FormAction, FormActionFactory {
         if (errors.size() > 0) {
             context.error(eventError);
             context.validationError(formData, errors);
-            return;
-
         } else {
             context.success();
         }
@@ -104,8 +94,6 @@ public class RegistrationProfile implements FormAction, FormActionFactory {
     public void success(FormContext context) {
         UserModel user = context.getUser();
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
-        user.setFirstName(formData.getFirst(RegistrationPage.FIELD_FIRST_NAME));
-        user.setLastName(formData.getFirst(RegistrationPage.FIELD_LAST_NAME));
         user.setEmail(formData.getFirst(RegistrationPage.FIELD_EMAIL));
     }
 
@@ -142,7 +130,7 @@ public class RegistrationProfile implements FormAction, FormActionFactory {
 
     @Override
     public String getDisplayType() {
-        return "Profile Validation";
+        return "Email Validation";
     }
 
     @Override
